@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta name="author" content="yenilikci">
+    <meta name="url" content="https://github.com/yenilikci/JavaScript-Yapilacaklar-Listesi">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript - Yapılacaklar Listesi</title>
+
+    <!--Stil Dosyalarının Projeye Dahil Edilmesi-->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+
+</head>
+
+<body>
+
+    <div class="container p-5">
+        <h1 class="uyg-ismi mb-4" id="baslik">
+            Yapılacaklar Listesi
+        </h1>
+
+        <div class="card">
+            <div class="card-header">
+                Yeni Görev
+            </div>
+            <div class="card-body">
+                <form action="" id="gorevEkle">
+                    <div class="input-group mt-3">
+                        <input type="text" id="gorevIsmi" class="form-control" placeholder="Yeni görev giriniz...">
+                        <div class="input-group-append">
+                            <button class="btn btn-success" id="eklemeBitir">
+                                <i class="fas fa-plus-square"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header">
+                Görev Listesi
+                <a id="hepsiniSil" href="#" class="btn btn-outline-danger btn-sm float-right">Tamamını
+                    Sil</a>
+            </div>
+            <ul id="gorevListesi" class="list-group">
+
+            </ul>
+        </div>
+
+    </div>
+
+    <!--Script Dosyalarının Projeye Dahil Edilmesi-->
+    <script src="bootstrap.js"></script>
+    <script src="jQuery.js"></script>
+    <script src="popper.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

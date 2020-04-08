@@ -1,0 +1,9 @@
+#baslik
+{
+    font-family: monospace;
+    font-size: 28px;
+    background-color: black;
+    padding: 10px;
+    color: white;
+    display: inline-block;
+}
