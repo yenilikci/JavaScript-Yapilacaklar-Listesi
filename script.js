@@ -15,13 +15,17 @@ olaylar();
 function olaylar() {
     //eleman ekleme olayı
     form.addEventListener('submit', elemanEkle);
+    //eleman silme
+    gorevListesi.addEventListener('click', elemanSil);
+    //tüm elemanları silme
+    hepsiniSil.addEventListener('click', elemanlarinHepsiniSil);
 }
 
 //eleman ekleme
 function elemanEkle(e) {
     if (veri.value == '') //boş geçilmişse uyarı
     {
-        alert('Yeni eleman ekleyiniz...');
+        alert('Yeni görev giriniz bölümünü boş bırakmayınız...');
     }
 
     //li elemanı oluşturma
@@ -48,6 +52,29 @@ function elemanEkle(e) {
 
     //girdi temizleme
     veri.value = '';
+
+    e.preventDefault();
+}
+
+//eleman silme
+function elemanSil(e) {
+    if (e.target.className === 'fas fa-times') {
+        e.target.parentElement.parentElement.remove();
+    }
+
+    e.preventDefault();
+}
+
+//elemanların hepsini silme
+function elemanlarinHepsiniSil(e) {
+    //gorevListesi.innerHTML='';
+
+    if (confirm('Hepsini silmek istediğinize emin misiniz?')) {
+        //opsiyonel çözüm;
+        while (gorevListesi.firstChild) {
+            gorevListesi.removeChild(gorevListesi.firstChild);
+        }
+    }
 
     e.preventDefault();
 }
