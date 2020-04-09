@@ -7,6 +7,10 @@ const form = document.querySelector('form');
 const veri = document.querySelector('#gorevIsmi');
 const hepsiniSil = document.querySelector('#hepsiniSil');
 const gorevListesi = document.querySelector('#gorevListesi');
+const elemanlar = ['Kahvaltı yap','Dişlerini fırçala','Sabah egzersizi yap'];
+
+//elemanların yüklenmesi
+elemanYukle();
 
 //tüm olayları çağır
 olaylar();
@@ -21,6 +25,40 @@ function olaylar() {
     hepsiniSil.addEventListener('click', elemanlarinHepsiniSil);
 }
 
+function elemanYukle()
+{
+    elemanlar.forEach(function(eleman)
+    {
+        elemanOlustur(eleman);
+    })
+}
+
+function elemanOlustur(elemanVeri)
+{
+        //li elemanı oluşturma
+        const li = document.createElement('li');
+        //li elemanına sınıf atayalım
+        li.className = 'list-group-item';
+        //yazının li içerisine eklenmesi için
+        li.appendChild(document.createTextNode(elemanVeri));
+    
+    
+        //li elemanının içindeki a etiketini oluşturma
+        const a = document.createElement('a');
+        a.classList = 'float-right';
+    
+        //a attribute yapılandırma
+        a.setAttribute('href', '#');
+        a.innerHTML = '<i class="fas fa-times"></i>';
+    
+        //a etiketini li etiketinin içerisine ekleme 
+        li.appendChild(a);
+    
+        //li etiketini ul etiketinin içerisine yerleştirme
+        gorevListesi.appendChild(li);
+    
+}
+
 //eleman ekleme
 function elemanEkle(e) {
     if (veri.value == '') //boş geçilmişse uyarı
@@ -28,27 +66,8 @@ function elemanEkle(e) {
         alert('Yeni görev giriniz bölümünü boş bırakmayınız...');
     }
 
-    //li elemanı oluşturma
-    const li = document.createElement('li');
-    //li elemanına sınıf atayalım
-    li.className = 'list-group-item';
-    //yazının li içerisine eklenmesi için
-    li.appendChild(document.createTextNode(veri.value));
-
-
-    //li elemanının içindeki a etiketini oluşturma
-    const a = document.createElement('a');
-    a.classList = 'float-right';
-
-    //a attribute yapılandırma
-    a.setAttribute('href', '#');
-    a.innerHTML = '<i class="fas fa-times"></i>';
-
-    //a etiketini li etiketinin içerisine ekleme 
-    li.appendChild(a);
-
-    //li etiketini ul etiketinin içerisine yerleştirme
-    gorevListesi.appendChild(li);
+    //gelen veri değerine göre oluşturulan eleman ekleniyor
+    elemanOlustur(veri.value);
 
     //girdi temizleme
     veri.value = '';
