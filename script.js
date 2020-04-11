@@ -7,7 +7,7 @@ const form = document.querySelector('form');
 const veri = document.querySelector('#gorevIsmi');
 const hepsiniSil = document.querySelector('#hepsiniSil');
 const gorevListesi = document.querySelector('#gorevListesi');
-const elemanlar = ['Kahvaltı yap','Dişlerini fırçala','Sabah egzersizi yap'];
+let elemanlar;
 
 //elemanların yüklenmesi
 elemanYukle();
@@ -27,10 +27,43 @@ function olaylar() {
 
 function elemanYukle()
 {
+    elemanlar = getElemanLocalS();
+    
     elemanlar.forEach(function(eleman)
     {
         elemanOlustur(eleman);
-    })
+    });
+}
+
+//elemanları local storage'den alma
+function getElemanLocalS()
+{
+    if(localStorage.getItem('elemanAnahtarlari') === null)
+    {
+        elemanlar = [];
+    }else{
+        eleman = JSON.parse(localStorage.getItem('elemanAnahtarlari'));
+    }
+    return elemanlar;
+}
+
+//elemanlara local store'dan değer atama
+function setElemanLocalS(elemanVeri)
+{
+    elemanlar = getElemanLocalS();
+    elemanlar.push(elemanVeri);
+    localStorage.setItem('elemanAnahtarlari',JSON.stringify(elemanlar)); //string ifadeler + [] içinde
+}
+
+function silLocalS(elemanVeri)
+{
+    elemanlar = getElemanLocalS();
+    elemanlar.forEach(function(eleman,indeks)
+    {
+        if(eleman === elemanVeri)
+            elemanlar.splice(indeks,1);
+    });
+    localStorage.setItem('elemanAnahtarlari',JSON.stringify(elemanlar));
 }
 
 function elemanOlustur(elemanVeri)
@@ -69,6 +102,9 @@ function elemanEkle(e) {
     //gelen veri değerine göre oluşturulan eleman ekleniyor
     elemanOlustur(veri.value);
 
+    //local storage'e verilerin eklenmesi
+    setElemanLocalS(veri.value);
+
     //girdi temizleme
     veri.value = '';
 
@@ -79,6 +115,9 @@ function elemanEkle(e) {
 function elemanSil(e) {
     if (e.target.className === 'fas fa-times') {
         e.target.parentElement.parentElement.remove();
+
+        //localstore'dan silme
+        silLocalS(e.target.parentElement.parentElement.textContent);
     }
 
     e.preventDefault();
@@ -93,6 +132,8 @@ function elemanlarinHepsiniSil(e) {
         while (gorevListesi.firstChild) {
             gorevListesi.removeChild(gorevListesi.firstChild);
         }
+        //local storage elemanların temizlenmesi
+        localStorage.clear();
     }
 
     e.preventDefault();
