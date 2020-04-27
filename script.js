@@ -42,7 +42,7 @@ function getElemanLocalS()
     {
         elemanlar = [];
     }else{
-        eleman = JSON.parse(localStorage.getItem('elemanAnahtarlari'));
+        elemanlar = JSON.parse(localStorage.getItem('elemanAnahtarlari'));
     }
     return elemanlar;
 }
